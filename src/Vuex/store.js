@@ -27,9 +27,12 @@ const store = createStore ({
                 })
                 if (!isProductExists) {
                     state.cart.push(product);
+                    product.quantity = 1;
+
                 }
             }else {
-                state.cart.push(product)
+                state.cart.push(product);
+                product.quantity = 1;
             }
 
         },
@@ -65,6 +68,7 @@ const store = createStore ({
         },
         ADD_TO_CART({commit},product) {
             commit('SET_CART', product);
+
         },
         DELETE_FROM_CART({commit},index) {
             commit('REMOVE_FROM_CART',index)
