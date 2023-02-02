@@ -88,6 +88,7 @@
             <li class="box-cart-shopping">
               <a class="nav-item" href="#" @click="showShoppingCart" >
                 <i class="fa-solid fa-cart-shopping"></i>
+                <span>{{ CART.length}}</span>
               </a>
               <div class="modalShoppingCart" v-show="showModalCart">
                 <ShoppingCart :cartData="CART" ></ShoppingCart>

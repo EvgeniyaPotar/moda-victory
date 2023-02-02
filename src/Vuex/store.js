@@ -36,9 +36,24 @@ const store = createStore ({
             }
 
         },
-        REMOVE_FROM_CART: (state, index) =>
-            state.cart.splice(index,1)
+        REMOVE_FROM_CART: (state, index) => {
+            state.cart.splice(index, 1)
+        },
+        PLUS_QUANTITY_TO_CART: (state,index) => {
+                state.cart[index].quantity++
+
+        },
+        MINUS_QUANTITY_FROM_CART:(state,index) => {
+            if (state.cart[index].quantity >=1) {
+                state.cart[index].quantity--
+            }
+            if (state.cart[index].quantity === 0) {
+                state.cart.splice(index, 1)
+            }
+        }
+
     },
+
     actions: {
         GET_PRODUCTS_NEW_FROM_API({commit})  {
             return axios('http://localhost:3000/productsNew', {
@@ -68,10 +83,15 @@ const store = createStore ({
         },
         ADD_TO_CART({commit},product) {
             commit('SET_CART', product);
-
         },
         DELETE_FROM_CART({commit},index) {
             commit('REMOVE_FROM_CART',index)
+        },
+        ADD_QUANTITY_TO_CART({commit},index) {
+            commit('PLUS_QUANTITY_TO_CART',index)
+        },
+        DELETE_QUANTITY_FROM_CART({commit},index) {
+            commit('MINUS_QUANTITY_FROM_CART',index)
         }
     },
     getters: {
