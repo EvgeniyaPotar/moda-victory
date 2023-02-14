@@ -22,17 +22,21 @@ const store = createStore ({
                 state.cart.map(function (item){
                     if (item.id === product.id) {
                         isProductExists = true;
-                        item.quantity++
+                        item.quantity++;
+                        item.totalPrice = item.quantity*item.price;
                     }
                 })
                 if (!isProductExists) {
                     state.cart.push(product);
                     product.quantity = 1;
+                    product.totalPrice = product.price;
+
 
                 }
             }else {
                 state.cart.push(product);
                 product.quantity = 1;
+                product.totalPrice = product.price;
             }
 
         },
@@ -40,20 +44,20 @@ const store = createStore ({
             state.cart.splice(index, 1)
         },
         PLUS_QUANTITY_TO_CART: (state,index) => {
-                state.cart[index].quantity++
+                state.cart[index].quantity++;
+                state.cart[index].totalPrice = state.cart[index].quantity*state.cart[index].price;
 
         },
         MINUS_QUANTITY_FROM_CART:(state,index) => {
             if (state.cart[index].quantity >=1) {
-                state.cart[index].quantity--
+                state.cart[index].quantity--;
+                state.cart[index].totalPrice = state.cart[index].quantity*state.cart[index].price;
             }
             if (state.cart[index].quantity === 0) {
                 state.cart.splice(index, 1)
             }
         }
-
     },
-
     actions: {
         GET_PRODUCTS_NEW_FROM_API({commit})  {
             return axios('http://localhost:3000/productsNew', {
@@ -93,6 +97,7 @@ const store = createStore ({
         DELETE_QUANTITY_FROM_CART({commit},index) {
             commit('MINUS_QUANTITY_FROM_CART',index)
         }
+
     },
     getters: {
         PRODUCTS_NEW(state) {

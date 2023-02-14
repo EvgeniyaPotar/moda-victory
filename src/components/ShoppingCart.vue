@@ -20,16 +20,24 @@
     </div>
 
     <div class="totalCart">
-      <p v-if="cartData.length">Total amount: $0</p>
+      <p v-if="cartData.length">Total amount: ${{  totalPriceOfProducts }}</p>
+    </div>
+
+    <div class="checkout" v-if="cartData.length">
+      <button class="btn-checkout">
+        <a href="#">Сheckout</a>
+      </button>
     </div>
   </div>
+
+
 
 </template>
 
 <script>
- import CartItem from '../components/CartItem';
- import { mapActions} from "vuex";
 
+ import CartItem from '../components/CartItem';
+ import {mapActions, mapGetters} from "vuex";
 
  export default {
   name:"shopping-cart",
@@ -38,6 +46,7 @@
   },
   data() {
     return {
+
     }
   },
   props:{
@@ -52,6 +61,15 @@
     }
   },
   computed: {
+    ...mapGetters([
+      'CART'
+    ]),
+    totalPriceOfProducts() {
+      let sum = 0;
+      for (let i=0; i<this.cartData.length; i++)
+      sum += this.cartData[i].totalPrice;
+      return sum
+    }
 
   },
   methods: {
@@ -65,10 +83,13 @@
     },
     addQuantity(index) {
       this.ADD_QUANTITY_TO_CART(index)
+
     },
     deleteQuantity(index) {
       this.DELETE_QUANTITY_FROM_CART(index)
-    }
+    },
+
+
   },
 
 }
@@ -89,7 +110,7 @@
     }
 
     .shopping-cart {
-      width: 80%;
+      width: 50%;
       height:auto;
       margin: 80px auto;
       background: #FFFFFF;
@@ -138,6 +159,26 @@
       color: #5E6977;
       font-size: 16px;
       font-weight: 700;
+    }
+
+    .checkout {
+      display: flex;
+      justify-content: flex-end;
+      margin: 10px 30px;
+      height: 40px;
+
+    }
+    .btn-checkout {
+      right: 0;
+      border:1px solid #f87272;
+      background: #f87272;
+    }
+
+    .btn-checkout a {
+      margin: 8px 20px 3px;
+      color:#ffffff;
+      text-decoration: none;
+      font-size: 16px;
     }
   </style>
 

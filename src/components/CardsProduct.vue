@@ -12,7 +12,7 @@
         <div class="description-product">
           <img :src="product.photo">
           <p>{{ product.nameProduct}}</p>
-          <p>{{ product.price}}</p>
+          <p>${{ product.price}}</p>
           <ul class="colorProduct">
             <li  v-for="(color,index) in product.colors"
                  :key="index">

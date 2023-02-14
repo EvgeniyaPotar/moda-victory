@@ -4,11 +4,7 @@
       <div class="preview-logo">
         <a class="logo" src="#"></a>
       </div>
-      <div class=preview-btn>
-        <button class="btn-buy-now">
-          <a href="#">Buy now</a>
-        </button>
-      </div>
+
     </div>
 
     <div class="header">
@@ -81,7 +77,7 @@
                 <i class="fa-solid fa-user"></i>
               </a>
 
-              <div class="modalLogIn" v-show="showModal">
+              <div class="modalLogIn" v-show="showModal" >
                 <UserLogin :show="showModal" @close="showModal=false" ></UserLogin>
               </div>
             </li>
@@ -143,9 +139,7 @@
                 v-for="(category,index) in categories"
                 @click.prevent="setActive(index)"
                 :key="category.id"
-                :class="{
-                  active:(isActive === category.id)
-                }"
+                :class="{ active:(isActive === category.id) }"
             >
               <a href="#">{{category.title}}</a>
             </li>
@@ -193,7 +187,7 @@
             <i class="fa-regular fa-clock"></i>
           </div>
           <h4>
-            <a href="№">Opening All Week</a>
+            <a href="#">Opening All Week</a>
           </h4>
           <p>6.00 am - 17.00pm</p>
         </div>
@@ -293,7 +287,8 @@
         <div class="footer-information">
           <div class="footer-list">
             <ul>
-              <li  v-for="(list,index) in footerList.list1" :key="index">
+              <li  v-for="(list,index) in footerList.list1"
+                   :key="index">
                 <a href="#">{{ list }}</a>
               </li>
 
@@ -301,14 +296,17 @@
           </div>
           <div class="footer-list">
             <ul>
-              <li  v-for="(list,index) in footerList.list2" :key="index">
+              <li v-for="(list,index) in footerList.list2"
+                  :key="index">
                 <a href="#">{{ list }}</a>
               </li>
             </ul>
           </div>
           <div class="footer-list">
             <ul>
-              <li  v-for="(list,index) in footerList.list3" :key="index">
+              <li  v-for="(list,index) in footerList.list3"
+                   :key="index"
+                    >
                 <a href="#">{{ list }}</a>
               </li>
             </ul>
@@ -500,7 +498,7 @@ export default {
     }
   },
   computed: {
-    filteredProducts(){
+    filteredProducts() {
       let products =this.PRODUCTS_SALE;
       const active_category_id = this.isActive;
       products = products.filter((p)=>p.category_id.indexOf(active_category_id)>=0);
@@ -534,7 +532,7 @@ export default {
     ]),
     addToCart(data) {
       this.ADD_TO_CART(data);
-    },
+    }
   },
   mounted() {
     this.GET_PRODUCTS_NEW_FROM_API();

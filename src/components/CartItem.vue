@@ -16,13 +16,15 @@
               >-</button>
          </div>
          <div class="cartItem-total-price" >
-           <p>${{ cartItemData.price*cartItemData.quantity }}</p>
+           <p>${{ cartItemData.totalPrice }}</p>
          </div>
          <button @click="deleteFromCart">X</button>
        </div>
 </template>
 
 <script>
+
+
 export default {
   name: "cartItem",
   props: {
@@ -36,7 +38,10 @@ export default {
   data() {
     return {}
   },
-  computed: {},
+  computed: {
+
+  },
+
   methods: {
     deleteFromCart() {
     this.$emit('deleteFromCart')
@@ -46,7 +51,8 @@ export default {
     },
     deleteQuantity() {
       this.$emit('deleteQuantity')
-    }
+    },
+
   }
 }
 </script>
