@@ -68,6 +68,12 @@
               <a class="box-search" href="#"  @click="toggleElement" title="Search...">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </a>
+              <ul class="submenu">
+                <li class="menu-item">
+                  <a href="#">Contact Style 1</a>
+                  <a href="#">Contact Style 2</a>
+                </li>
+              </ul>
               <form action="#" method="get" class="search-all-pages" v-show="isElVisible">
                 <input type="text" size="30" placeholder="Search...">
               </form>
@@ -77,8 +83,11 @@
                 <i class="fa-solid fa-user"></i>
               </a>
 
-              <div class="modalLogIn" v-show="showModal" >
-                <UserLogin :show="showModal" @close="showModal=false" ></UserLogin>
+              <div class="modalLogIn" >
+                <UserLogin :show="showModal"
+                           v-show="showModal"
+                           @close="showModal=false"
+                ></UserLogin>
               </div>
             </li>
             <li class="box-cart-shopping">
@@ -86,8 +95,11 @@
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span>{{ CART.length}}</span>
               </a>
-              <div class="modalShoppingCart" v-show="showModalCart">
-                <ShoppingCart :cartData="CART" ></ShoppingCart>
+              <div class="modalShoppingCart"  >
+                <ShoppingCart :cartData="CART"
+                              v-show="showModalCart"
+                              @close="toggleModalShoppingCart"
+                ></ShoppingCart>
               </div>
             </li>
           </ul>
@@ -359,42 +371,6 @@ export default {
       isElVisible: false,
       showModal: false,
       showModalCart: false,
-      // productsNew: [
-      //   {
-      //     id:1,
-      //     sticker: 'New',
-      //     stickerColor: '#60c267',
-      //     photo: require('/assets/images/1.jpg'),
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     colors: ['red', 'green', 'black' ]
-      //
-      //   },
-      //   {
-      //     id:2,
-      //     sticker: 'New',
-      //     stickerColor: '#60c267',
-      //     photo: require('/assets/images/2.jpg'),
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     colors: ['red', 'green', 'black' ]
-      //   },
-      //   {
-      //     id:3,
-      //     sticker: 'Sale',
-      //     stickerColor: '#f38181',
-      //     photo: require('/assets/images/3.jpg'),
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00'
-      //   },
-      //   {
-      //     id:4,
-      //     photo: require('/assets/images/4.jpg'),
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     colors: ['red', 'green', 'black' ]
-      //   }
-      // ],
       isActive: 1,
       categories: [
         {
@@ -417,79 +393,6 @@ export default {
           id:5,
           title:"Accessories"
         }],
-
-      // productsSale: [
-      //   {
-      //     id:1,
-      //     photo: '/assets/images/5.jpg',
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     colors: ['red', 'green', 'black' ],
-      //     category_id:[1,4]
-      //   },
-      //   {
-      //     id:2,
-      //     sticker: 'New',
-      //     stickerColor: '#60c267',
-      //     photo: '/assets/images/6.jpg',
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     category_id: [1,4,5],
-      //     kids:true
-      //
-      //   },
-      //   {
-      //     id:3,
-      //     photo: '/assets/images/7.jpg',
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     colors: ['red', 'green', 'black' ],
-      //     category_id: [1,2,4,5]
-      //   },
-      //   {
-      //     id:4,
-      //     photo: '/assets/images/8.jpg',
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     colors: ['red', 'green', 'black' ],
-      //     category_id: [1,3]
-      //   },
-      //   {
-      //     id:5,
-      //     sticker: 'New',
-      //     stickerColor: '#60c267',
-      //     photo: '/assets/images/12.jpg',
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     category_id: [1,2,3,5]
-      //   },
-      //   {
-      //     id:6,
-      //     sticker: 'Sale',
-      //     stickerColor: '#f38181',
-      //     photo: '/assets/images/13.jpg',
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     colors: ['red', 'green', 'black' ],
-      //     category_id: [1,2,3,4]
-      //   },
-      //   {
-      //     id:7,
-      //     photo: '/assets/images/14.jpg',
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     category_id: [1,5]
-      //   },
-      //   {
-      //     id:8,
-      //     sticker: 'New',
-      //     stickerColor: '#60c267',
-      //     photo: '/assets/images/15.jpg',
-      //     nameProduct: 'Cotton White Underweaer Block Out Edition',
-      //     price:'$100.00',
-      //     category_id: [1,2,3]
-      //   },
-      // ],
       footerList: {
         list1: ['About Us', 'Online Store', 'Blog', 'Contact Us'],
         list2: ['Login/ Register', 'Your Cart', 'Wishlist items', 'Your checkout'],
@@ -521,6 +424,9 @@ export default {
     showShoppingCart() {
       this.showModalCart=!this.showModalCart
     },
+    toggleModalShoppingCart() {
+      this.showModalCart = !this.showModalCart
+    },
 
     setActive(index) {
       this.isActive = this.categories[index].id;
@@ -533,6 +439,28 @@ export default {
     addToCart(data) {
       this.ADD_TO_CART(data);
     }
+  },
+  created() {
+      window.document.addEventListener('click', e => { // при клике в любом месте окна браузера
+        const target = e.target // находим элемент, на котором был клик
+        if (!target.closest('.modalShoppingCart') &&  !target.closest('.box-cart-shopping')) { // если этот элемент или его родительские элементы не окно навигации и не кнопка
+          this.showModalCart = false;// то закрываем окно навигации, удаляя активный класс
+        }
+      })
+
+    window.document.addEventListener('click', e => { // при клике в любом месте окна браузера
+      const target = e.target // находим элемент, на котором был клик
+      if (!target.closest('.user-login-content') &&  !target.closest('.box-login'))  { // если этот элемент или его родительские элементы не окно навигации и не кнопка
+        this.showModal = false;// то закрываем окно навигации, удаляя активный класс
+      }
+    })
+
+    window.document.addEventListener('click', e => { // при клике в любом месте окна браузера
+      const target = e.target // находим элемент, на котором был клик
+      if (!target.closest('.box-search'))  { // если этот элемент или его родительские элементы не окно навигации и не кнопка
+        this.isElVisible = false;// то закрываем окно навигации, удаляя активный класс
+      }
+    })
   },
   mounted() {
     this.GET_PRODUCTS_NEW_FROM_API();

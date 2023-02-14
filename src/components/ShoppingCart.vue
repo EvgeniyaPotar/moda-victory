@@ -1,32 +1,39 @@
 <template>
-  <div class="shopping-cart">
+  <div class="modal-backdrop"
+       @click="closeModal">
+    <div class="shopping-cart">
+      <div class="shopping-cart-content"
+           @click.stop
+      >
 
-    <div class="title">
-      Shopping Cart
-    </div>
-    <div class="empty-cart">
-      <p v-if="!cartData.length">There are no products in cart...</p>
-    </div>
+          <div class="title">
+            Shopping Cart
+          </div>
+          <div class="empty-cart">
+            <p v-if="!cartData.length">There are no products in cart...</p>
+          </div>
 
+          <div class="item" >
+            <CartItem v-for = "(item,index) in cartData"
+                      :key="index"
+                      :cartItemData="item"
+                      @deleteFromCart="deleteFromCart(index)"
+                      @addQuantity="addQuantity(index)"
+                      @deleteQuantity="deleteQuantity(index)"
+            ></CartItem>
+          </div>
 
-    <div class="item" >
-      <CartItem v-for = "(item,index) in cartData"
-                :key="index"
-                :cartItemData="item"
-                @deleteFromCart="deleteFromCart(index)"
-                @addQuantity="addQuantity(index)"
-                @deleteQuantity="deleteQuantity(index)"
-      ></CartItem>
-    </div>
+          <div class="totalCart">
+            <p v-if="cartData.length">Total amount: ${{  totalPriceOfProducts }}</p>
+          </div>
 
-    <div class="totalCart">
-      <p v-if="cartData.length">Total amount: ${{  totalPriceOfProducts }}</p>
-    </div>
+          <div class="checkout" v-if="cartData.length">
+            <button class="btn-checkout">
+              <a href="#">Сheckout</a>
+            </button>
+          </div>
 
-    <div class="checkout" v-if="cartData.length">
-      <button class="btn-checkout">
-        <a href="#">Сheckout</a>
-      </button>
+      </div>
     </div>
   </div>
 
@@ -50,9 +57,6 @@
     }
   },
   props:{
-    show: {
-      type:Boolean
-    },
     cartData: {
       type: Array,
       default() {
@@ -88,11 +92,12 @@
     deleteQuantity(index) {
       this.DELETE_QUANTITY_FROM_CART(index)
     },
-
-
+    closeModal() {
+      this.$emit('close');
+    }
   },
 
-}
+ }
 </script>
 
   <style scoped>
@@ -108,6 +113,18 @@
       background-color: #7EC855;
       font-family: 'Roboto', sans-serif;
     }
+
+    .modal-backdrop {
+      position: absolute;
+      z-index: 3;
+      top: 140px;/* Сидеть на вершине */
+      left: 0;
+      right: 0;
+      overflow: auto; /* Включите прокрутку, если это необходимо */
+      background-color: rgb(0,0,0); /* Цвет запасной вариант */
+      background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
+    }
+
 
     .shopping-cart {
       width: 50%;
