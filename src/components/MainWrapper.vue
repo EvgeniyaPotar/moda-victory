@@ -1,111 +1,114 @@
 <template>
   <div class="main-wrapper">
-    <div class="preview-header"  id="preview-header">
-      <div class="preview-logo">
-        <a class="logo" src="#"></a>
+    <header class="fixed-header">
+
+      <div class="preview-header"  id="preview-header">
+        <div class="preview-logo">
+          <a class="logo" src="#"></a>
+        </div>
       </div>
 
-    </div>
+      <div class="header">
+        <div class="header-inner">
+          <div class="header-inner-logo">Moda<span>Victory</span></div>
+          <nav class="nav">
+            <ul class="menu">
+              <li class="nav-item">
+                <a href="index.html">Home</a>
+                <ul class="submenu">
+                  <li class="menu-item">
+                    <a href="#">Homepage Style1</a>
+                    <a href="#">Homepage Style2</a>
+                    <a href="#">Homepage Style3</a>
+                    <a href="#">Homepage Style4</a>
+                    <a href="#">Homepage Style5</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#">Shop</a>
+                <ul class="submenu">
+                  <li class="menu-item">
+                    <a href="#">Shop Layouts</a>
+                    <a href="#">Shop Detais</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item" >
+                <a href="#">Page</a>
+                <ul class="submenu">
+                  <li class="menu-item">
+                    <a href="#">Coming soon</a>
+                    <a href="#">FAQs</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item" >
+                <a href="#">Blog</a>
+                <ul class="submenu">
+                  <li class="menu-item">
+                    <a href="#">Blog list full</a>
+                    <a href="#">Blog list Slide 1 </a>
+                    <a href="#">Blog list Slide 2</a>
+                    <a href="#">Blog Gird Full</a>
+                    <a href="#">Blog Gird Slide</a>
+                    <a href="#">Blog Details</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#">Contact</a>
+                <ul class="submenu">
+                  <li class="menu-item">
+                    <a href="#">Contact Style 1</a>
+                    <a href="#">Contact Style 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a class="box-search" href="#"  @click="toggleElement" title="Search...">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <ul class="submenu">
+                  <li class="menu-item">
+                    <a href="#">Contact Style 1</a>
+                    <a href="#">Contact Style 2</a>
+                  </li>
+                </ul>
+                <form action="#" method="get" class="search-all-pages" v-show="isElVisible">
+                  <input type="text" size="30" placeholder="Search...">
+                </form>
+              </li>
+              <li class="box-login">
+                <a class="nav-item" href="#" @click="showAuthorization" title="Log in" >
+                  <i class="fa-solid fa-user"></i>
+                </a>
 
-    <div class="header">
-      <div class="header-inner">
-        <div class="header-inner-logo">Moda<span>Victory</span></div>
-        <nav class="nav">
-          <ul class="menu">
-            <li class="nav-item">
-              <a href="index.html">Home</a>
-              <ul class="submenu">
-                <li class="menu-item">
-                  <a href="#">Homepage Style1</a>
-                  <a href="#">Homepage Style2</a>
-                  <a href="#">Homepage Style3</a>
-                  <a href="#">Homepage Style4</a>
-                  <a href="#">Homepage Style5</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#">Shop</a>
-              <ul class="submenu">
-                <li class="menu-item">
-                  <a href="#">Shop Layouts</a>
-                  <a href="#">Shop Detais</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item" >
-              <a href="#">Page</a>
-              <ul class="submenu">
-                <li class="menu-item">
-                  <a href="#">Coming soon</a>
-                  <a href="#">FAQs</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item" >
-              <a href="#">Blog</a>
-              <ul class="submenu">
-                <li class="menu-item">
-                  <a href="#">Blog list full</a>
-                  <a href="#">Blog list Slide 1 </a>
-                  <a href="#">Blog list Slide 2</a>
-                  <a href="#">Blog Gird Full</a>
-                  <a href="#">Blog Gird Slide</a>
-                  <a href="#">Blog Details</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#">Contact</a>
-              <ul class="submenu">
-                <li class="menu-item">
-                  <a href="#">Contact Style 1</a>
-                  <a href="#">Contact Style 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a class="box-search" href="#"  @click="toggleElement" title="Search...">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </a>
-              <ul class="submenu">
-                <li class="menu-item">
-                  <a href="#">Contact Style 1</a>
-                  <a href="#">Contact Style 2</a>
-                </li>
-              </ul>
-              <form action="#" method="get" class="search-all-pages" v-show="isElVisible">
-                <input type="text" size="30" placeholder="Search...">
-              </form>
-            </li>
-            <li class="box-login">
-              <a class="nav-item" href="#" @click="showAuthorization" title="Log in" >
-                <i class="fa-solid fa-user"></i>
-              </a>
-
-              <div class="modalLogIn" >
-                <UserLogin :show="showModal"
-                           v-show="showModal"
-                           @close="showModal=false"
-                ></UserLogin>
-              </div>
-            </li>
-            <li class="box-cart-shopping">
-              <a class="nav-item" href="#" @click="showShoppingCart" >
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span>{{ CART.length}}</span>
-              </a>
-              <div class="modalShoppingCart"  >
-                <ShoppingCart :cartData="CART"
-                              v-show="showModalCart"
-                              @close="toggleModalShoppingCart"
-                ></ShoppingCart>
-              </div>
-            </li>
-          </ul>
-        </nav>
+                <div class="modalLogIn" >
+                  <UserLogin :show="showModal"
+                             v-show="showModal"
+                             @close="showModal=false"
+                  ></UserLogin>
+                </div>
+              </li>
+              <li class="box-cart-shopping">
+                <a class="nav-item" href="#" @click="showShoppingCart" >
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  <span>{{ CART.length}}</span>
+                </a>
+                <div class="modalShoppingCart"  >
+                  <ShoppingCart :cartData="CART"
+                                v-show="showModalCart"
+                                @close="toggleModalShoppingCart"
+                  ></ShoppingCart>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
-    </div>
+
+    </header>
 
     <SliderChange></SliderChange>
 

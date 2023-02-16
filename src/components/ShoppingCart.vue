@@ -71,7 +71,7 @@
     totalPriceOfProducts() {
       let sum = 0;
       for (let i=0; i<this.cartData.length; i++)
-      sum += this.cartData[i].totalPrice;
+      sum += +this.cartData[i].totalPrice;
       return sum
     }
 
@@ -116,12 +116,12 @@
 
     .modal-backdrop {
       position: absolute;
+      height: 100vh;
       z-index: 3;
       top: 140px;/* Сидеть на вершине */
       left: 0;
       right: 0;
       overflow: auto; /* Включите прокрутку, если это необходимо */
-      background-color: rgb(0,0,0); /* Цвет запасной вариант */
       background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
     }
 
